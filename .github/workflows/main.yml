@@ -2,10 +2,10 @@
 # https://help.github.com/en/articles/configuring-a-workflow
 name: Cypress tests
 
-on: push
+on: workflow_dispatch
 
 jobs:
-  test1:
+  job1:
     name: Cypress test
     runs-on: ubuntu-22.04
     steps:
