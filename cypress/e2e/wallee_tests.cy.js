@@ -1,21 +1,24 @@
-import ProductListPage from "../pages/ProductListPage"
-import ProductDetailsPage from "../pages/ProductDetailsPage"
+import productListPage from "../pages/productListPage"
+import productDetailsPage from "../pages/productDetailsPage"
+import cartPage from "../pages/cartPage"
 
 
-const plp = new ProductListPage()
-const pdp = new ProductDetailsPage()
+
+const plp = new productListPage()
+const pdp = new productDetailsPage()
+const cp = new cartPage()
+
 
 beforeEach(function () {
   cy.visit('/')
-
+  cy.writeProductDataIntoFixtureFile();
+  cy.fixture("products").then((productData) => {
+    this.products = productData;
+  });
 
 });
 
 describe("Wallee Webshop Tests", () => {
-
-  it('Create products fixture file', () => {
-    cy.writeProductDataIntoFixtureFile()
-  })
 
   it('End-to-end flow for a web shop.', () => {
     plp.elements.products().then(($elements) => {
@@ -23,79 +26,50 @@ describe("Wallee Webshop Tests", () => {
       cy.log(`Number of elements with ID 'yourId': ${numberOfMatchingElements}`)
     })
 
-    plp.elements.productItemDiv(1).find('div[data-block-name="woocommerce/product-image"] img').invoke("attr", "src").then((srcValue) => {
+    plp.elements.productItem(1).find('div[data-block-name="woocommerce/product-image"] img').invoke("attr", "src").then((srcValue) => {
       cy.log(srcValue)
     })
     let price = null
-    plp.elements.productItemDiv(0).find('[data-block-name="woocommerce/product-price"]').invoke("text").then((price) => {
+    plp.elements.productItem(0).find('[data-block-name="woocommerce/product-price"]').invoke("text").then((price) => {
       cy.log(price)
     })
-    plp.elements.productItemDiv(0).find('a').eq(1).invoke("text").then((name) => {
+    plp.elements.productItem(0).find('a').eq(1).invoke("text").then((name) => {
       cy.log(name)
     })
 
   })
 
 
-  it("User can successfully sign-up for a subscription", function () {
+  it("Should Successfully Sign Up for a Subscription", function () {
     plp.clickOnProductBtn(0)
+    cy.url().should('eq', Cypress.config().baseUrl + 'cart')
 
   })
 
-  it("User can successfully place an order of a product", function () {
-    plp.clickOnProductBtn(0)
-
-  })
-
-
-  it('Check all links returning status ok in plp', () => {
-    let linksTested = 0
-    cy.get('a').each(link => {
-      if (link.prop('href')) {
-        linksTested++
-        cy.log(`Link ${link.text()} has href attribute: ${link.prop('href')}`)
-        cy.request({
-          url: link.prop('href')
-        }).should(({ status }) => {
-          if (status === 200 || status === 400) {
-            expect(status).to.eq(200)
-          } else {
-            expect(status).to.eq(400)
-          }
-          expect(link.prop('href')).to.exist
-        })
-      }
-      else {
-        cy.log(`Link ${link.text()} does not have href attribute`)
-      }
-    }).then(() => {
-      cy.log(`Total links tested: ${linksTested}`)
+  it("Should Successfully Place an Order for a Product", function () {
+    plp.clickOnProductBtn(1)
+    cy.url().should('eq', Cypress.config().baseUrl + 'cart')
+    cp.elements.cartItems().its('length').then((count) => {
+      cy.log(`Number of items in Cart: ${count}`)
+    });
+    cp.elements.itemName(0).invoke("text").then((name) => {
+      expect(name.trim()).to.equal(this.products[1].name)
     })
+    cp.elements.itemPrice(0).invoke("text").then((price) => {
+      expect(price.match(/\d+\.*\d*/g)[0]).to.equal(this.products[1].price)
+    })
+
+    cp.elements.removeButton(0).click()
+    cy.get('.return-to-shop').should('be.visible')
+    cp.elements.itemPrice(0).should('be.visible')
   })
 
-  it('Check all links returning status ok in pdp', () => {
-    let linksTested = 0
+  it('Should Check all links in productListPage', () => {
+    cy.checkAllLinks()
+  })
+
+  it('Should Check all links in productDetailsPage', () => {
     plp.elements.productImage(1).click()
-    cy.get('a').each(link => {
-      if (link.prop('href')) {
-        linksTested++
-        cy.log(`Link ${link.text()} has href attribute: ${link.prop('href')}`)
-        cy.request({
-          url: link.prop('href')
-        }).should(({ status }) => {
-          if (status === 200 || status === 400) {
-            expect(status).to.eq(200)
-          } else {
-            expect(status).to.eq(400)
-          }
-          expect(link.prop('href')).to.exist
-        })
-      }
-      else {
-        cy.log(`Link ${link.text()} does not have href attribute`)
-      }
-    }).then(() => {
-      cy.log(`Total links tested: ${linksTested}`)
-    })
+    cy.checkAllLinks()
   })
 })
