@@ -1,0 +1,31 @@
+# GitHub Actions
+# https://help.github.com/en/articles/configuring-a-workflow
+name: Cypress tests
+
+on: workflow_dispatch
+
+jobs:
+  job1:
+    name: Cypress test
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Cypress run
+      uses: cypress-io/github-action@v5
+
+    # Save videos and screenshots as test artifacts
+    # https://github.com/actions/upload-artifact
+    - uses: actions/upload-artifact@v3
+        # there might be no screenshots created when:
+        # - there are no test failures
+        # so only upload screenshots if previous step has failed
+      if: failure()
+      with:
+        name: screenshots
+        path: cypress/screenshots
+    # video should always be generated
+    - uses: actions/upload-artifact@v3
+      with:
+        name: videos
+        path: cypress/videos
