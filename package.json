@@ -6,12 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "cypress:coverage": "npx nyc --reporter=html --reporter=text npm run cypress:run"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^13.5.0"
+    "@cypress/code-coverage": "^3.12.11",
+    "cypress": "^13.5.0",
+    "nyc": "^15.1.0"
   }
 }

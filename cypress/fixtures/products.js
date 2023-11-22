@@ -2,41 +2,41 @@
   {
     "name": "Daily Subscription",
     "price": "9.00",
-    "image": "https://woocommerce.showcase-wallee.com/wp-content/uploads/woocommerce-placeholder.png"
+    "image": "https://woocommerce.showcase-wallee.com/wp-content/uploads/woocommerce-placeholder-600x600.png"
   },
   {
     "name": "Glasses",
-    "price": "27.00",
-    "image": "https://woocommerce.showcase-wallee.com/wp-content/uploads/woocommerce-placeholder.png"
+    "price": "20.00",
+    "image": "https://woocommerce.showcase-wallee.com/wp-content/uploads/woocommerce-placeholder-600x600.png"
   },
   {
     "name": "Laptops",
-    "price": "62.00",
-    "image": "https://woocommerce.showcase-wallee.com/wp-content/uploads/woocommerce-placeholder.png"
+    "price": "23.00",
+    "image": "https://woocommerce.showcase-wallee.com/wp-content/uploads/woocommerce-placeholder-600x600.png"
   },
   {
     "name": "Pants",
-    "price": "31.00",
-    "image": "https://woocommerce.showcase-wallee.com/wp-content/uploads/woocommerce-placeholder.png"
+    "price": "13.00",
+    "image": "https://woocommerce.showcase-wallee.com/wp-content/uploads/woocommerce-placeholder-600x600.png"
   },
   {
     "name": "Phones",
-    "price": "22.00",
-    "image": "https://woocommerce.showcase-wallee.com/wp-content/uploads/woocommerce-placeholder.png"
+    "price": "11.00",
+    "image": "https://woocommerce.showcase-wallee.com/wp-content/uploads/woocommerce-placeholder-600x600.png"
   },
   {
     "name": "Shirt",
-    "price": "19.00",
-    "image": "https://woocommerce.showcase-wallee.com/wp-content/uploads/woocommerce-placeholder.png"
+    "price": "55.00",
+    "image": "https://woocommerce.showcase-wallee.com/wp-content/uploads/woocommerce-placeholder-600x600.png"
   },
   {
     "name": "Shoes",
-    "price": "17.00",
-    "image": "https://woocommerce.showcase-wallee.com/wp-content/uploads/woocommerce-placeholder.png"
+    "price": "60.00",
+    "image": "https://woocommerce.showcase-wallee.com/wp-content/uploads/woocommerce-placeholder-600x600.png"
   },
   {
     "name": "Socks",
-    "price": "20.00",
-    "image": "https://woocommerce.showcase-wallee.com/wp-content/uploads/woocommerce-placeholder.png"
+    "price": "11.00",
+    "image": "https://woocommerce.showcase-wallee.com/wp-content/uploads/woocommerce-placeholder-600x600.png"
   }
 ]

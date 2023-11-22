@@ -1,0 +1,9 @@
+{
+    "firstName": "Max",
+    "lastName": "Hamilton",
+    "streetAddress": "Quai des Bergues 33",
+    "postCode": "1201",
+    "city": "Genève",
+    "phoneNumber": "+41234567890",
+    "emailAddress": "max.hamilton@yopmail.com"
+}

@@ -1,12 +1,15 @@
-import ProductListPage from "../pages/productListPage";
+import productListPage from "../pages/productListPage";
+import checkoutPage from "../pages/checkoutPage";
 
 
-const plp = new ProductListPage()
+
+const productList = new productListPage()
+const checkout = new checkoutPage()
 
 
 Cypress.Commands.add("writeProductDataIntoFixtureFile", () => {
     let products = [];
-    plp.elements.products().each(($product) => {
+    productList.elements.products().each(($product) => {
         let product = {
             name: null,
             price: null,
@@ -62,5 +65,18 @@ Cypress.Commands.add("checkAllLinks", () => {
         }
     }).then(() => {
         cy.log(`Total links tested: ${linksTested}`)
+    })
+})
+
+
+Cypress.Commands.add("TypeBuyerInfo", () => {
+    cy.fixture("buyerinfo").then((buyerinfo) => {
+        checkout.typeFirstName(buyerinfo.firstName)
+        checkout.typeLastName(buyerinfo.lastName)
+        checkout.typeStreetAddress(buyerinfo.streetAddress)
+        checkout.typePostCode(buyerinfo.postCode)
+        checkout.typeCity(buyerinfo.city)
+        checkout.typePhoneNumber(buyerinfo.phoneNumber)
+        checkout.typeEmailAddress(buyerinfo.emailAddress)
     })
 })
